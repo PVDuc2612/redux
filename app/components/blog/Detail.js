@@ -13,7 +13,7 @@ const Detail = () => {
                 className="group relative block h-48 w-full shrink-0 self-start overflow-hidden bg-gray-100 md:h-full md:w-32 lg:w-48"
             >
                 <img
-                    src="https://images.unsplash.com/photo-1648184217069-34f0a57791bc?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
+                    src="https://i.pinimg.com/564x/22/ad/4e/22ad4e68386b6b7bb4fc1083525e200f.jpg"
                     loading="lazy"
                     alt="Nơi nào có ý chí, nơi đó có con đường."
                     className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"

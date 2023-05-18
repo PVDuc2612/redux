@@ -1,12 +1,10 @@
 
 
-export interface Product{
-    id: number;
-    name: string;
-    price: number;
-    imagePath: string;
-}
-export interface CartItem{
-    product: Product;
-    qty: number;
+export interface Post{
+    id: number,
+    name: string,
+    email: string,
+    address: string,
+    phone: string,
+    image: string,
 }

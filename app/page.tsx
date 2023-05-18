@@ -1,14 +1,16 @@
+import Container from "./components/Container";
 import Blog from "./components/blog/Blog";
 import AddModal from "./components/modal/Addmodal";
+import Navbar from "./components/navbar/Navbar";
 
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-screen-xl px-4 md:px-8">
+    <Container>
       <Blog />
       <div className="float-right">
         <AddModal />
       </div>
-    </div>
+    </Container>
   )
 }

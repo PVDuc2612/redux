@@ -13,7 +13,6 @@ const AddModal = () => {
         staff: "",
     })
 
-    console.log(show)
 
 
     const handleValues = (event) => {

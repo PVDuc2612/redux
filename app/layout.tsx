@@ -1,6 +1,6 @@
-// import Providers from './Providers'
+import Providers from './Providers'
+import Navbar from './components/navbar/Navbar'
 
-import {Provider} from 'react-redux'
 
 import './globals.css'
 import { store } from '@/store/store'
@@ -17,9 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Provider store={store}>
+        <Providers >
+          <Navbar />
           {children}
-        </Provider>
+        </Providers>
       </body>
     </html>
   )

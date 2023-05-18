@@ -1,8 +1,20 @@
-
+'use client'
+import { useSelector } from "react-redux";
 import Detail from "./Detail";
 
 
+
+
+
 const Blog = () => {
+  // useSelector((state) => state.property.alias)
+  // reducer:{
+  //   blog: blogReducer
+  // }
+  const postList = useSelector((state) => state.blog.postList)
+  console.log(postList)
+
+
     return (
         <div>
         <div className=" py-6 sm:py-8 lg:py-8">
