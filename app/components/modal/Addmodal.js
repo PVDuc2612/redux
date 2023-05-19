@@ -2,18 +2,22 @@
 import { useState } from "react";
 
 import {IoMdClose} from 'react-icons/io'
+import Input from "../Input";
+import { useDispatch  } from "react-redux";
+import { addUsers, deleteUsers } from "@/store/reducer/UserReducer";
 
 const AddModal = () => {
+    const dispatch  = useDispatch()
     const [show, setShow] = useState(false)
     const [getInput, setGetInput] = useState({
-        customer: "",
-        inventory: "",
-        rental_date: "",
-        return_date: "",
-        staff: "",
+        name: "",
+        email: "",
+        phone: "",
+        address: "",
+        image: "",
+        id:"",
+        bought: "",
     })
-
-
 
     const handleValues = (event) => {
         const nameInput = event.target.name;
@@ -26,21 +30,45 @@ const AddModal = () => {
     }
 
     const handleKeyDown = (e) => {
-        console.log(e.key)
-        if(e.key  === 'Escape'){
+            if(e.key  === 'Escape'){
             setShow(!show)
         }
     }
 
-    const handleSubmit = (e) =>{    
+    const handleSubmit = (e) =>{  
+        const date = Date.now()
+        const random  = Math.floor(Math.random() * 100)
+        e.preventDefault()  
         setShow(!show)
+        const data = {
+            name: getInput.name,
+            email: getInput.email,
+            phone: getInput.phone,
+            address: getInput.address,
+            image: getInput.image,
+            id: date.toString(),
+            bought: random
+        }
+        dispatch(addUsers(data))
+
+        setGetInput({
+            name: "",
+            email:"",
+            phone: "",
+            address: "",
+            image: "",
+            id: "",
+            bought: "",
+        })
     }
+
+    
 
 
     return (
       <div>
             <button onClick={handleShow} data-modal-target="popup-modal" data-modal-toggle="popup-modal" className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-              Create Blog
+              Create User
             </button>
 
             {show && (
@@ -70,81 +98,23 @@ const AddModal = () => {
 
                             <div className=" p-6 mx-4">
                                 <form>
-                                    <div className="mb-6">
-                                    <label
-                                        htmlFor="title"
-                                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >Title</label
-                                    ><input
-                                        type="text"
-                                        id="title"
-                                        className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-                                        placeholder="Title"
-                                        required=""
-                                        value=""
-                                    />
-                                    </div>
-                                    <div className="mb-6">
-                                    <label
-                                        htmlFor="featuredImage"
-                                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >Featured Image</label
-                                    ><input
-                                        type="text"
-                                        id="featuredImage"
-                                        className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-                                        placeholder="Url image"
-                                        required=""
-                                        value=""
-                                    />
-                                    </div>
-                                    <div className="mb-6">
-                                    <div>
-                                        <label
-                                        htmlFor="description"
-                                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-400"
-                                        >Description</label
-                                        ><textarea
-                                        id="description"
-                                        rows="3"
-                                        className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-                                        placeholder="Your description..."
-                                        required=""
-                                        ></textarea>
-                                    </div>
-                                    </div>
-                                    <div className="mb-6">
-                                    <label
-                                        htmlFor="publishDate"
-                                        className="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >Publish Date</label
-                                    ><input
-                                        type="datetime-local"
-                                        id="publishDate"
-                                        className="block w-56 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-blue-500"
-                                        placeholder="Title"
-                                        required=""
-                                        value=""
-                                    />
-                                    </div>
-                                    <div className="mb-6 flex items-center">
-                                    <input
-                                        id="publish"
-                                        type="checkbox"
-                                        className="h-4 w-4 focus:ring-2 focus:ring-blue-500"
-                                    /><label htmlFor="publish" className="ml-2 text-sm font-medium text-gray-900"
-                                        >Publish</label
-                                    >
-                                    </div>
+                                    <Input label="Name..." value={getInput.name} name="name" onChange={handleValues}/>     
+                                    <Input label="Email..."  value={getInput.email} name="email" onChange={handleValues}/>     
+                                    <Input label="Phone..."  value={getInput.phone} name="phone" onChange={handleValues}/>     
+                                    <Input label="Address..."  value={getInput.address} name="address" onChange={handleValues}/>  
+                                    <Input label="Image URL..."  value={getInput.image} name="image" onChange={handleValues} />     
+
+
                                     <div>
                                     <button
-                                        className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-purple-600 to-blue-500 p-0.5 text-sm font-medium text-gray-900 hover:text-white focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
+                                        onClick={handleSubmit}
+                                        className="group relative inline-flex items-center justify-center overflow-hidden mr-[10px] rounded-lg bg-gradient-to-br from-purple-600 to-blue-500 p-0.5 text-sm font-medium text-gray-900 hover:text-white focus:outline-none focus:ring-4 focus:ring-blue-300 group-hover:from-purple-600 group-hover:to-blue-500 dark:text-white dark:focus:ring-blue-800"
                                         type="submit"
                                     >
                                         <span
                                         className="relative rounded-md bg-white px-5 py-2.5 transition-all duration-75 ease-in group-hover:bg-opacity-0 dark:bg-gray-900"
-                                        >Publish Post</span
-                                        >
+                                        >Create</span>
+                                        
                                     </button>
                                     <button
                                         type="submit"
@@ -152,16 +122,17 @@ const AddModal = () => {
                                     >
                                         <span
                                         className="relative rounded-md bg-white px-5 py-2.5 transition-all duration-75 ease-in group-hover:bg-opacity-0 dark:bg-gray-900"
-                                        >Update Post</span
-                                        ></button
-                                    ><button
+                                        >Update</span>
+                                        </button>
+                                    <button
+                                        
                                         type="reset"
                                         className="group relative mb-2 mr-2 inline-flex items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 p-0.5 text-sm font-medium text-gray-900 focus:outline-none focus:ring-4 focus:ring-red-100 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 dark:focus:ring-red-400"
                                     >
                                         <span
                                         className="relative rounded-md bg-white px-5 py-2.5 transition-all duration-75 ease-in group-hover:bg-opacity-0 dark:bg-gray-900"
-                                        >Cancel</span
-                                        >
+                                        >Cancel</span>
+                                        
                                     </button>
                                     </div>
                                 </form>

@@ -1,10 +1,11 @@
 
 
 export interface Post{
-    id: number,
+    id: string,
     name: string,
     email: string,
     address: string,
     phone: string,
     image: string,
+    bought: number,
 }
